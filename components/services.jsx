@@ -36,7 +36,7 @@ const Services = () => {
           textTransform="uppercase"
           mb={8}
         >
-          Here's what I'm good at
+          {`Here's what I'm good at`}
         </Heading>
         <Heading
           textAlign="center"
