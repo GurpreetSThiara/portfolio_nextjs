@@ -45,7 +45,7 @@ const Hero = () => {
             fontFamily="heading"
             color="white"
           >
-            Hello I'm Gurpreet Singh!
+           {` Hello I'm Gurpreet Singh!`}
           </Heading>
           <Text
             pt={{ base: 6, sm: 8, lg: 3 }}
@@ -72,7 +72,7 @@ const Hero = () => {
                 color="white"
                 fontFamily="body"
               >
-                Let's connect
+               {`Let's connect`}
               </Text>
               <Box display={{ base: "none", sm: "block" }}>
                 <Icon as={BsChevronRight} boxSize={8} color="yellow.400" />

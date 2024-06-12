@@ -10,10 +10,10 @@ const MyInfo = () => {
             Who am I?
           </Heading>
           <Heading as="h4" pt={6} fontSize={{ base: "xl", sm: "2xl", lg: "3xl" }} fontWeight="medium" color="gray.200">
-            I'm Gurpreet Singh, a Full Stack Web & App Developer
+            {`I'm Gurpreet Singh, a Full Stack Web & App Developer`}
           </Heading>
           <Text pt={6} textAlign="justify" fontSize={{ base: "md", sm: "lg", lg: "xl" }} color="gray.200" lineHeight="tall">
-            Hey there! I'm a Full Stack Developer at Kreativan Technologies, located in Chandigarh, India.
+           {` Hey there! I'm a Full Stack Developer at Kreativan Technologies, located in Chandigarh, India.
             I absolutely love what I do – building cool stuff on the web and mobile platforms. At Kreativan
             Technologies, I've had the opportunity to work on some exciting projects across various industries, from
             e-commerce to healthcare. Collaborating with my awesome teammates, I've helped bring ideas to life and
@@ -21,7 +21,7 @@ const MyInfo = () => {
             problem solver, a team player, and a lifelong learner. I thrive on challenges, enjoy working with
             others, and always stay up-to-date with the latest tech trends. If you're looking for someone passionate
             about technology and dedicated to delivering top-notch solutions, I'm your person! Let's connect and
-            create something awesome together.
+            create something awesome together.`}
           </Text>
           <Flex flexDirection={{ base: "column", sm: "row" }} alignItems="center" pt={6} w="full" justifyContent={{ sm: "start" }}>
             <Text fontSize="lg" fontWeight="semibold" textTransform="uppercase" color="gray.500">
