@@ -85,19 +85,21 @@ const Hero = () => {
               pl={{ sm: 2 }}
             >
               <Box pr={4}>
-                <Link href="/" _hover={{ color: "yellow.400" }}>
-                  <Icon as={AiFillLinkedin} boxSize={8} color="white" />
-                </Link>
+              <a href="https://www.linkedin.com/in/gurpreetsthiara" target="_blank" rel="noopener noreferrer">
+    <Icon as={AiFillLinkedin} boxSize={8} color="white" />
+  </a>
+ 
+  
               </Box>
-              <Box pr={4}>
+              {/* <Box pr={4}>
                 <Link href="/" _hover={{ color: "yellow.400" }}>
                   <Icon as={AiFillTwitterCircle} boxSize={8} color="white" />
                 </Link>
-              </Box>
+              </Box> */}
               <Box pr={4}>
-                <Link href="/" _hover={{ color: "yellow.400" }}>
-                  <Icon as={AiFillInstagram} boxSize={8} color="white" />
-                </Link>
+              <a href="https://www.instagram.com/gurpreetthiara_" target="_blank" rel="noopener noreferrer">
+    <Icon as={AiFillInstagram} boxSize={8} color="white" />
+  </a>
               </Box>
             </Flex>
           </Flex>

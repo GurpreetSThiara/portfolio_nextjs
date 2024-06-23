@@ -17,11 +17,7 @@ const servicesData = [
     icon: webIcon,
     description: "From iOS to Android, we build native and cross-platform mobile apps.",
   },
-  {
-    title: "Web Design",
-    icon: graphicsIcon,
-    description: "Our designs blend creativity and functionality to elevate your online presence.",
-  },
+
 ];
 
 const Services = () => {

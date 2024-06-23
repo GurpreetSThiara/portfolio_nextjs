@@ -23,7 +23,7 @@ const MyInfo = () => {
             about technology and dedicated to delivering top-notch solutions, I'm your person! Let's connect and
             create something awesome together.`}
           </Text>
-          <Flex flexDirection={{ base: "column", sm: "row" }} alignItems="center" pt={6} w="full" justifyContent={{ sm: "start" }}>
+          {/* <Flex flexDirection={{ base: "column", sm: "row" }} alignItems="center" pt={6} w="full" justifyContent={{ sm: "start" }}>
             <Text fontSize="lg" fontWeight="semibold" textTransform="uppercase" color="gray.500">
               Connect with me
             </Text>
@@ -44,7 +44,7 @@ const MyInfo = () => {
                 <IconButton icon={<FaInstagram />} variant="ghost" fontSize="2xl" color="blue.500" _hover={{ color: "yellow.500" }} />
               </Link>
             </Stack>
-          </Flex>
+          </Flex> */}
         </Flex>
       </Container>
     </Box>
