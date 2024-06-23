@@ -74,10 +74,8 @@ const Navbar = () => {
               'About',
               'Services',
               'Portfolio',
-              'Clients',
-              'Work',
-              'Statistics',
-              'Blog',
+          
+             
               'Contact',
             ].map (item => (
               <Box key={item} mx="1rem">
@@ -153,10 +151,7 @@ const Navbar = () => {
                   'About',
                   'Services',
                   'Portfolio',
-                  'Clients',
-                  'Work',
-                  'Statistics',
-                  'Blog',
+             
                   'Contact',
                 ].map (item => (
                   <Box key={item}>

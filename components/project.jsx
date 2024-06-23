@@ -14,9 +14,9 @@ import { useRouter } from 'next/navigation';
 import shopHome from './../public/react/shopSphere/9.webp';
 import shopMap from './../public/react/shopSphere/10.webp';
 import userShopMap from './../public/react/shopSphere/2.webp';
+import Link from 'next/link';
 
-
-const Project = ({ images, title, description, techStack }) => {
+const Project = ({ name,images, title, description, techStack,link }) => {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
   const controls = useAnimation();
   const [isClient, setIsClient] = useState(false);
@@ -37,12 +37,12 @@ const Project = ({ images, title, description, techStack }) => {
     }
   }, [controls, inView]);
 
-
   const handleClick = () => {
     if (router) {
-      router.push(`/views/react/${title}`);
+      router.push(`/views/react/${name}`);
     }
   };
+
 
 
   return (
@@ -65,6 +65,7 @@ const Project = ({ images, title, description, techStack }) => {
     >
      <Flex alignItems={'center'} justifyContent={'space-between'}>
      <Text
+     textAlign={{base:'center',md:''}}
         as={motion.h1}
         initial="hidden"
         animate={controls}
@@ -79,6 +80,7 @@ const Project = ({ images, title, description, techStack }) => {
       >
         {title}
       </Text>
+   
       <Flex display={{ base: "none", md: "flex" }}   as={motion.div}
       initial="hidden"
       animate={controls}
@@ -91,7 +93,21 @@ const Project = ({ images, title, description, techStack }) => {
         </Button>
       </Flex>
      </Flex>
+
+     <Box       as={motion.a}
+        initial="hidden"
+        animate={controls}
+        variants={{
+          hidden: { opacity: 0, y: 20 },
+          visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+        }} textAlign={'center'}> {link &&  <Link legacyBehavior href="https://freeresumebuilder.vercel.app" passHref>
+      
+      <a target="_blank" rel="noopener noreferrer">
+      https://freeresumebuilder.vercel.app
+      </a>
+    </Link>}</Box>
       <Text
+      textAlign={'justify'}
         as={motion.p}
         initial="hidden"
         animate={controls}

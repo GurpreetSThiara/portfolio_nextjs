@@ -7,7 +7,7 @@ const CustomButton = ({}) => {
     const router = useRouter();
     const handleClick = () => {
         if (router) {
-          router.push(`/views/react/sex}`);
+          router.push(`/views/react/s}`);
         }
       };
   return (

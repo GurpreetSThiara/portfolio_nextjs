@@ -7,6 +7,7 @@ import MyInfo from "@components/profileInfo";
 import Skills from "@components/skills";
 import Services from "@components/services";
 import Portfolio from "@components/portfolio";
+import ContactForm from "@components/Contact";
 
 
 export default function Home() {
@@ -22,6 +23,7 @@ export default function Home() {
       <Services/>
       <Portfolio/>
       </Box>
+      <ContactForm/>
   
      
     </main>
