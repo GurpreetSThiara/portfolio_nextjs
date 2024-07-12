@@ -13,14 +13,14 @@ import SolarSystem from "./SolarSystem";
 const Hero = () => {
   return (
     <Box
-      p={0}
-      m={0}
+     
       position="relative"
-      w={"100vw"}
+      
       h={"100vh"}
       display={"flex"}
       alignItems={"center"}
       justifyContent={"center"}
+ 
     >
       <Box
         h={"100vh"}
@@ -46,6 +46,7 @@ const Hero = () => {
             fontSize={{ base: "4xl", sm: "5xl", md: "6xl" }}
             fontFamily="heading"
             color="white"
+            opacity={'0.7'}
           >
            {` Hello I'm Gurpreet Singh!`}
           </Heading>
@@ -56,6 +57,7 @@ const Hero = () => {
             fontWeight="medium"
             color="white"
             textAlign={{ base: "center", sm: "left" }}
+            opacity={'0.7'}
           >
             Full Stack Web & App Developer
           </Text>

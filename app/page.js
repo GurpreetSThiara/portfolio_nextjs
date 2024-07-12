@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <main >
     
-      <Box p={'1rem'}>
+      <Box py={'1rem'}>
       <Hero/>
       <MyInfo/>
       <Skills/>
