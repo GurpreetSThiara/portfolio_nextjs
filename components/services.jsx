@@ -10,12 +10,12 @@ const servicesData = [
   {
     title: "WEB DEVELOPMENT",
     icon: mobileIcon,
-    description: "We craft responsive and intuitive web applications tailored to your needs.",
+    description: "i craft responsive and intuitive web applications tailored to your needs.",
   },
   {
     title: "Mobile Development",
     icon: webIcon,
-    description: "From iOS to Android, we build native and cross-platform mobile apps.",
+    description: "From iOS to Android,  build native and cross-platform mobile apps.",
   },
 
 ];

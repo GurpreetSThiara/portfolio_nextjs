@@ -59,7 +59,7 @@ const Portfolio = () => {
  
 
   return (
-    <Box id='portfolio' ref={ref} bgGradient="linear(to-r,black, black,blue.900);">
+    <Box m={0} id='portfolio' ref={ref} bgGradient="linear(to-r,black, black,blue.900);">
       <Heading
         as={motion.h1}
         initial="hidden"

@@ -13,7 +13,9 @@ const MyInfo = () => {
             {`I'm Gurpreet Singh, a Full Stack Web & App Developer`}
           </Heading>
           <Text pt={6} textAlign="justify" fontSize={{ base: "md", sm: "lg", lg: "xl" }} color="gray.200" lineHeight="tall">
-           {` Hey there! I'm a Full Stack Developer at Kreativan Technologies, located in Chandigarh, India.
+           {` Hey there! I'm a Full Stack Developer at `} <a style={{color:'blue'}} href="https://kreativantech.com" target="_blank" rel="noopener noreferrer">
+    Kreativan Technologies
+  </a>{`, located in Chandigarh, India.
             I absolutely love what I do – building cool stuff on the web and mobile platforms. At Kreativan
             Technologies, I've had the opportunity to work on some exciting projects across various industries, from
             e-commerce to healthcare. Collaborating with my awesome teammates, I've helped bring ideas to life and

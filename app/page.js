@@ -2,12 +2,13 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import Hero from "@components/hero";
-import { Box } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import MyInfo from "@components/profileInfo";
 import Skills from "@components/skills";
 import Services from "@components/services";
 import Portfolio from "@components/portfolio";
 import ContactForm from "@components/Contact";
+import Apps from "@components/apps";
 
 
 export default function Home() {
@@ -16,13 +17,14 @@ export default function Home() {
   return (
     <main >
     
-      <Box py={'1rem'}>
+      <Flex flexDirection={'column'} py={'1rem'} gap={0}>
       <Hero/>
       <MyInfo/>
       <Skills/>
       <Services/>
       <Portfolio/>
-      </Box>
+      <Apps/>
+      </Flex>
       <ContactForm/>
   
      
