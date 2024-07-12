@@ -8,6 +8,7 @@ import {
 import { BsChevronRight } from "react-icons/bs";
 import name from "./../public/bg-hero.jpg";
 import Image from "next/image";
+import SolarSystem from "./SolarSystem";
 
 const Hero = () => {
   return (
@@ -27,9 +28,10 @@ const Hero = () => {
         w={"full"}
         position={"absolute"}
         zIndex={-1}
-        opacity={0.1}
+        opacity={0.9}
       >
-        <Image src={name} alt={""} layout="fill" objectFit="cover" />
+        <SolarSystem/>
+        {/* <Image src={name} alt={""} layout="fill" objectFit="cover" /> */}
       </Box>
       <Box className="absolute inset-0 z-20 gradient-overlay" />
 

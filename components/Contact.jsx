@@ -1,13 +1,25 @@
 "use client"
 
 import { useState } from 'react';
-import { Box, Heading, Text, Input, Textarea, Button, Flex, Icon, useColorModeValue } from '@chakra-ui/react';
+import { Box, Heading, Text, Input, Textarea, Button, Flex, Icon, useColorModeValue, Toast, useDisclosure,  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+ 
+  Spinner, } from '@chakra-ui/react';
 import { PhoneIcon, EmailIcon, Icon as MapIcon } from '@chakra-ui/icons';
+import { CheckCircleIcon, CloseIcon } from "@chakra-ui/icons";
 
 export default function ContactForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(null);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const formBgColor = useColorModeValue('white', 'gray.800');
   const formTextColor = useColorModeValue( 'white');
@@ -15,31 +27,67 @@ export default function ContactForm() {
   const secondaryTextColor = useColorModeValue('gray.600', 'gray.400');
 
   const handleSubmit = async (e) => {
+   
     e.preventDefault();
+    setIsLoading(true);
+    onOpen();
+    console.log("clicked");
 
     const scriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SCRIPT_URL;
     const data = { name, email, message };
 
-    try {
-      const response = await fetch(scriptUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
+  
+  
+    const formData = new FormData();
+    formData.append("Name", data.name);
+    formData.append("Email", data.email);
+    formData.append("Message", data.message);
 
-      const result = await response.json();
-      if (result.status === 'success') {
-        alert('Form submitted successfully');
-      } else {
-        alert('Form submission failed');
-      }
-    } catch (error) {
-      console.error('Error submitting form:', error);
+    fetch(scriptUrl, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => {
+        const contentType = res.headers.get("content-type");
+        if (contentType && contentType.indexOf("application/json") !== -1) {
+          return res.json();
+        } else {
+          return res.text();
+        }
+      })
+      .then((data) => {
+        setIsLoading(false);
+        setIsSuccess(true);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        setIsSuccess(false);
+      });
+  };
+  const renderModalContent = () => {
+    if (isLoading) {
+      return (
+        <Box display="flex" flexDirection="column" alignItems="center">
+          <Spinner size="xl" />
+          <Text mt={4}>Sending your message...</Text>
+        </Box>
+      );
+    } else if (isSuccess === true) {
+      return (
+        <Box display="flex" flexDirection="column" alignItems="center">
+          <Icon as={CheckCircleIcon} w={12} h={12} color="green.500" />
+          <Text mt={4}>Your message has been sent successfully!</Text>
+        </Box>
+      );
+    } else {
+      return (
+        <Box display="flex" flexDirection="column" alignItems="center">
+          <Icon as={CloseIcon} w={12} h={12} color="red.500" />
+          <Text mt={4}>Failed to send your message. Please try again later.</Text>
+        </Box>
+      );
     }
   };
-
   return (
     <Box id="contact" p={{ base: '16', md: '20' }} className="container">
       <Heading 
@@ -199,6 +247,20 @@ export default function ContactForm() {
           </Text>
         </Box>
       </Flex>
+
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Submission Status</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>{renderModalContent()}</ModalBody>
+          <ModalFooter>
+            <Button onClick={onClose} isDisabled={isLoading}>
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Box>
   );
 }
