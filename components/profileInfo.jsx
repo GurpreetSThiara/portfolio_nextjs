@@ -1,13 +1,30 @@
 import { Box, Container, Flex, Heading, Text, IconButton, Link, Stack } from "@chakra-ui/react";
 import { FaFacebookSquare, FaTwitter, FaDribbble, FaLinkedin, FaInstagram } from "react-icons/fa";
+import name from "./../public/bg-hero.jpg";
 
+import Image from "next/image";
 const MyInfo = () => {
   return (
-    <Box w="full" display="flex" justifyContent="center" alignItems="center" id="about" bg={'#000'}>
+    <Box w="full" display="flex" justifyContent="center" alignItems="center" id="about" overflow="hidden" >
+     <Box
+        position="absolute"
+        top={0}
+        left={0}
+        right={0}
+        bottom={0}
+     
+        bg={`url(${name.src})`}
+        bgSize="cover"
+        bgPosition="center"
+        bgAttachment="fixed"
+        zIndex={-1}
+     opacity={0.08}
+      />
+
       <Container maxW="container.lg" py={{ base: 16, md: 20 }} display="flex" flexDirection={{ base: "column", lg: "row" }} justifyContent="center" alignItems="center">
         <Flex flexDirection="column" textAlign={{ base: "center", lg: "left" }} alignItems="center" lg={{ flex: 3/4 }}>
           <Heading as="h2" fontSize={{ base: "4xl", sm: "5xl", lg: "6xl" }} fontWeight="semibold" textTransform="uppercase">
-            Who am I?
+            Who am I?ss
           </Heading>
           <Heading as="h4" pt={6} fontSize={{ base: "xl", sm: "2xl", lg: "3xl" }} fontWeight="medium" color="gray.200">
             {`I'm Gurpreet Singh, a Full Stack Web & App Developer`}

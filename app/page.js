@@ -9,6 +9,7 @@ import Services from "@components/services";
 import Portfolio from "@components/portfolio";
 import ContactForm from "@components/Contact";
 import Apps from "@components/apps";
+import Education from "@components/education";
 
 
 export default function Home() {
@@ -24,6 +25,7 @@ export default function Home() {
       <Services/>
       <Portfolio/>
       <Apps/>
+      <Education/>
       </Flex>
       <ContactForm/>
   

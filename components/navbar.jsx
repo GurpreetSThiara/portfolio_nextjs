@@ -75,6 +75,7 @@ const Navbar = () => {
               'Services',
               'Portfolio',
               'Apps',
+              'Education',
           
              
               'Contact',
@@ -153,6 +154,7 @@ const Navbar = () => {
                   'Services',
                   'Portfolio',
                   'Apps',
+                     'Education',
              
                   'Contact',
                 ].map (item => (

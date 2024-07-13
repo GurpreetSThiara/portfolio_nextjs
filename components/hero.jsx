@@ -6,8 +6,7 @@ import {
   AiFillInstagram,
 } from "react-icons/ai";
 import { BsChevronRight } from "react-icons/bs";
-import name from "./../public/bg-hero.jpg";
-import Image from "next/image";
+
 import SolarSystem from "./SolarSystem";
 
 const Hero = () => {

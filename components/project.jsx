@@ -247,6 +247,7 @@ const Project = ({ name,images, title, description, techStack,link }) => {
         bg={"black"}
         rounded={"full"}
         color={"white"}
+        onClick={handleClick}
       >
         Show more
       </Button>

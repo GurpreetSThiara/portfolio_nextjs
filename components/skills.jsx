@@ -1,5 +1,5 @@
 import { Box, Heading, Grid, List, ListItem } from "@chakra-ui/react";
-
+import { css } from "@emotion/react";
 // Data for skills
 const skillsData = [
   {
