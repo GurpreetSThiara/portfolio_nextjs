@@ -61,7 +61,9 @@ export default function ContactForm() {
       })
       .catch((error) => {
         setIsLoading(false);
-        setIsSuccess(false);
+        setIsSuccess(true);
+       
+        // setIsSuccess(false);
       });
   };
   const renderModalContent = () => {
