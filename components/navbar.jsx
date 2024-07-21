@@ -72,6 +72,10 @@ const Navbar = () => {
           >
             {[
               'About',
+      
+              'Experience',
+            
+              'Skills',
               'Services',
               'Portfolio',
               'Apps',
@@ -151,6 +155,10 @@ const Navbar = () => {
               >
                 {[
                   'About',
+              
+                  'Experience',
+            
+                  'Skills',
                   'Services',
                   'Portfolio',
                   'Apps',

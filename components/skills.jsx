@@ -31,6 +31,7 @@ const skillsData = [
 const Skills = () => {
   return (
     <Box
+    id="skills"
       bg="black"
       color="white"
       p={6}

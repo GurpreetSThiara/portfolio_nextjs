@@ -24,7 +24,7 @@ const MyInfo = () => {
       <Container maxW="container.lg" py={{ base: 16, md: 20 }} display="flex" flexDirection={{ base: "column", lg: "row" }} justifyContent="center" alignItems="center">
         <Flex flexDirection="column" textAlign={{ base: "center", lg: "left" }} alignItems="center" lg={{ flex: 3/4 }}>
           <Heading as="h2" fontSize={{ base: "4xl", sm: "5xl", lg: "6xl" }} fontWeight="semibold" textTransform="uppercase">
-            Who am I?ss
+            Who am I?
           </Heading>
           <Heading as="h4" pt={6} fontSize={{ base: "xl", sm: "2xl", lg: "3xl" }} fontWeight="medium" color="gray.200">
             {`I'm Gurpreet Singh, a Full Stack Web & App Developer`}

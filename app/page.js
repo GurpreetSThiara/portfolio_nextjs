@@ -10,6 +10,7 @@ import Portfolio from "@components/portfolio";
 import ContactForm from "@components/Contact";
 import Apps from "@components/apps";
 import Education from "@components/education";
+import Experience from "@components/experience";
 
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
       <Flex flexDirection={'column'} py={'1rem'} gap={0}>
       <Hero/>
       <MyInfo/>
+      <Experience/>
       <Skills/>
       <Services/>
       <Portfolio/>
