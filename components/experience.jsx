@@ -30,7 +30,7 @@ const Experience = () => {
           <Text fontSize={textSize} fontWeight="bold">Intern at Virtusa</Text>
           <Text>September 2023 - March 2024</Text>
           <Text textAlign={'justify'}>
-            During my internship at Virtusa, I had the opportunity to dive deep into full-stack development using Java. I worked on several projects where I learned the intricacies of backend development, database management, and API integration. This experience was invaluable as it laid a strong foundation for my career in software development.
+            During my internship at Virtusa, I had the opportunity to dive deep into full-stack development using Java.  I learned the intricacies of backend development, database management, and API integration. This experience was invaluable as it laid a strong foundation for my career in software development.
           </Text>
         </Box>
         <Box  w={textWidth}>
