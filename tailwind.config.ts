@@ -1,98 +1,215 @@
-import type { Config } from "tailwindcss";
-
-// all in fixtures is set to tailwind v3 as interims solutions
+import type { Config } from "tailwindcss"
 
 const config: Config = {
-    darkMode: ["class"],
-    content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "*.{js,ts,jsx,tsx,mdx}"
+  darkMode: ["class"],
+  content: [
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+    "*.{js,ts,jsx,tsx,mdx}",
   ],
+  prefix: "",
   theme: {
-  	extend: {
-  		colors: {
-  			background: 'hsl(var(--background))',
-  			foreground: 'hsl(var(--foreground))',
-  			card: {
-  				DEFAULT: 'hsl(var(--card))',
-  				foreground: 'hsl(var(--card-foreground))'
-  			},
-  			popover: {
-  				DEFAULT: 'hsl(var(--popover))',
-  				foreground: 'hsl(var(--popover-foreground))'
-  			},
-  			primary: {
-  				DEFAULT: 'hsl(var(--primary))',
-  				foreground: 'hsl(var(--primary-foreground))'
-  			},
-  			secondary: {
-  				DEFAULT: 'hsl(var(--secondary))',
-  				foreground: 'hsl(var(--secondary-foreground))'
-  			},
-  			muted: {
-  				DEFAULT: 'hsl(var(--muted))',
-  				foreground: 'hsl(var(--muted-foreground))'
-  			},
-  			accent: {
-  				DEFAULT: 'hsl(var(--accent))',
-  				foreground: 'hsl(var(--accent-foreground))'
-  			},
-  			destructive: {
-  				DEFAULT: 'hsl(var(--destructive))',
-  				foreground: 'hsl(var(--destructive-foreground))'
-  			},
-  			border: 'hsl(var(--border))',
-  			input: 'hsl(var(--input))',
-  			ring: 'hsl(var(--ring))',
-  			chart: {
-  				'1': 'hsl(var(--chart-1))',
-  				'2': 'hsl(var(--chart-2))',
-  				'3': 'hsl(var(--chart-3))',
-  				'4': 'hsl(var(--chart-4))',
-  				'5': 'hsl(var(--chart-5))'
-  			},
-  			sidebar: {
-  				DEFAULT: 'hsl(var(--sidebar-background))',
-  				foreground: 'hsl(var(--sidebar-foreground))',
-  				primary: 'hsl(var(--sidebar-primary))',
-  				'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-  				accent: 'hsl(var(--sidebar-accent))',
-  				'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-  				border: 'hsl(var(--sidebar-border))',
-  				ring: 'hsl(var(--sidebar-ring))'
-  			}
-  		},
-  		borderRadius: {
-  			lg: 'var(--radius)',
-  			md: 'calc(var(--radius) - 2px)',
-  			sm: 'calc(var(--radius) - 4px)'
-  		},
-  		keyframes: {
-  			'accordion-down': {
-  				from: {
-  					height: '0'
-  				},
-  				to: {
-  					height: 'var(--radix-accordion-content-height)'
-  				}
-  			},
-  			'accordion-up': {
-  				from: {
-  					height: 'var(--radix-accordion-content-height)'
-  				},
-  				to: {
-  					height: '0'
-  				}
-  			}
-  		},
-  		animation: {
-  			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
-  		}
-  	}
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
+    extend: {
+      colors: {
+        // GitHub Dark Theme Colors
+        github: {
+          bg: "#0d1117",
+          cardBg: "#161b22",
+          border: "#30363d",
+          text: "#c9d1d9",
+          textSecondary: "#8b949e",
+          accent: "#58a6ff",
+          accentSecondary: "#d2a8ff",
+          success: "#7ee787",
+          warning: "#ffa657",
+          error: "#f85149",
+          codeKeyword: "#ff7b72",
+          codeString: "#a5d6ff",
+          codeComment: "#8b949e",
+          codeFunction: "#d2a8ff",
+          codeVariable: "#79c0ff",
+        },
+        // VS Code Theme Colors
+        vscode: {
+          bg: "#1e1e1e",
+          cardBg: "#252526",
+          border: "#3e3e42",
+          text: "#d4d4d4",
+          textSecondary: "#969696",
+          accent: "#007acc",
+          accentSecondary: "#4fc1ff",
+          success: "#4ec9b0",
+          warning: "#dcdcaa",
+          error: "#f44747",
+          codeKeyword: "#569cd6",
+          codeString: "#ce9178",
+          codeComment: "#6a9955",
+          codeFunction: "#dcdcaa",
+          codeVariable: "#9cdcfe",
+        },
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
+    },
   },
+  safelist: [
+    // GitHub Dark Theme Classes
+    "bg-[#0d1117]",
+    "bg-[#161b22]",
+    "border-[#30363d]",
+    "text-[#c9d1d9]",
+    "text-[#8b949e]",
+    "text-[#58a6ff]",
+    "text-[#d2a8ff]",
+    "text-[#7ee787]",
+    "text-[#ffa657]",
+    "text-[#f85149]",
+    "text-[#ff7b72]",
+    "text-[#a5d6ff]",
+    "text-[#79c0ff]",
+    "bg-[#58a6ff]",
+    "bg-[#d2a8ff]",
+    "bg-[#7ee787]",
+    "bg-[#ffa657]",
+    "bg-[#f85149]",
+    "bg-[#ff7b72]",
+    "bg-[#a5d6ff]",
+    "bg-[#79c0ff]",
+    "border-[#58a6ff]",
+    "border-[#d2a8ff]",
+    "border-[#7ee787]",
+    "border-[#ffa657]",
+    "border-[#f85149]",
+    "border-[#ff7b72]",
+    "border-[#a5d6ff]",
+    "border-[#79c0ff]",
+    "hover:bg-[#58a6ff]",
+    "hover:bg-[#d2a8ff]",
+    "hover:bg-[#7ee787]",
+    "hover:text-[#58a6ff]",
+    "hover:text-[#d2a8ff]",
+    "hover:text-[#7ee787]",
+    "hover:border-[#58a6ff]",
+    "hover:border-[#d2a8ff]",
+    "hover:border-[#7ee787]",
+    "from-[#58a6ff]",
+    "to-[#d2a8ff]",
+    // VS Code Theme Classes
+    "bg-[#1e1e1e]",
+    "bg-[#252526]",
+    "border-[#3e3e42]",
+    "text-[#d4d4d4]",
+    "text-[#969696]",
+    "text-[#007acc]",
+    "text-[#4fc1ff]",
+    "text-[#4ec9b0]",
+    "text-[#dcdcaa]",
+    "text-[#f44747]",
+    "text-[#569cd6]",
+    "text-[#ce9178]",
+    "text-[#6a9955]",
+    "text-[#9cdcfe]",
+    "bg-[#007acc]",
+    "bg-[#4fc1ff]",
+    "bg-[#4ec9b0]",
+    "bg-[#dcdcaa]",
+    "bg-[#f44747]",
+    "bg-[#569cd6]",
+    "bg-[#ce9178]",
+    "bg-[#6a9955]",
+    "bg-[#9cdcfe]",
+    "border-[#007acc]",
+    "border-[#4fc1ff]",
+    "border-[#4ec9b0]",
+    "border-[#dcdcaa]",
+    "border-[#f44747]",
+    "border-[#569cd6]",
+    "border-[#ce9178]",
+    "border-[#6a9955]",
+    "border-[#9cdcfe]",
+    "hover:bg-[#007acc]",
+    "hover:bg-[#4fc1ff]",
+    "hover:bg-[#4ec9b0]",
+    "hover:text-[#007acc]",
+    "hover:text-[#4fc1ff]",
+    "hover:text-[#4ec9b0]",
+    "hover:border-[#007acc]",
+    "hover:border-[#4fc1ff]",
+    "hover:border-[#4ec9b0]",
+    "from-[#007acc]",
+    "to-[#4fc1ff]",
+    // Additional utility classes
+    "bg-white/10",
+    "backdrop-blur-lg",
+    "border-white/20",
+    "text-white/70",
+    "text-white/50",
+    "shadow-2xl",
+    "shadow-xl",
+    "shadow-[0_0_20px_#00ff0050]",
+    "shadow-[0_0_30px_#ff00ff50]",
+    "shadow-[0_8px_32px_0_rgba(31,38,135,0.37)]",
+  ],
   plugins: [require("tailwindcss-animate")],
-};
-export default config;
+} satisfies Config
+
+export default config

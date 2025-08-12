@@ -46,7 +46,7 @@ export default function Terminal({ onClose }: TerminalProps) {
         "💻 Passionate about building innovative software solutions",
         "🎓 M.Tech in Computer Science (9.6 GPA)",
         "📍 Based in Hoshiarpur, Punjab",
-        "🔥 2+ years of development experience",
+        "🔥 1.5+ years of development experience",
       ],
     },
     skills: {
