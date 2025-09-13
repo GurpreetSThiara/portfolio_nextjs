@@ -1,25 +1,12 @@
 "use client"
+/* eslint-disable react/no-unescaped-entities */
 
 import { motion } from "framer-motion"
-import { useState, useEffect } from "react"
 import { ChevronDown, Play } from "lucide-react"
 import { useTheme } from "@/contexts/theme-context"
 
 export default function HeroSection() {
-  const [displayText, setDisplayText] = useState("")
-  const [currentIndex, setCurrentIndex] = useState(0)
   const { currentTheme } = useTheme()
-  const fullText = "const developer = new SoftwareEngineer('Gurpreet Singh');"
-
-  useEffect(() => {
-    if (currentIndex < fullText.length) {
-      const timeout = setTimeout(() => {
-        setDisplayText(fullText.slice(0, currentIndex + 1))
-        setCurrentIndex(currentIndex + 1)
-      }, 100)
-      return () => clearTimeout(timeout)
-    }
-  }, [currentIndex, fullText])
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { 
   Download, 
@@ -9,35 +9,27 @@ import {
   Settings, 
   Code, 
   Palette, 
-  Type, 
-  Image, 
+  Image as ImageIcon, 
   Monitor,
   Smartphone,
   Tablet,
-  RotateCcw,
   Eye,
   EyeOff,
-  Check,
   Sparkles,
   Zap,
-  Layers,
   Wand2,
   ChevronDown,
-  ChevronRight,
-  Play,
-  Pause,
   RefreshCw
 } from "lucide-react"
-import { useTheme } from "@/contexts/theme-context"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+// Tabs import removed (unused)
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Slider } from "@/components/ui/slider"
 import { Switch } from "@/components/ui/switch"
 import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
+// Separator import removed (unused)
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import { toast } from "sonner"
 import html2canvas from "html2canvas"
@@ -268,12 +260,11 @@ const dimensions = [
   { name: "Tablet", width: 768, height: 1024, icon: Tablet },
   { name: "Mobile", width: 375, height: 812, icon: Smartphone },
   { name: "Twitter", width: 1200, height: 630, icon: Share2 },
-  { name: "Instagram", width: 1080, height: 1080, icon: Image },
+  { name: "Instagram", width: 1080, height: 1080, icon: ImageIcon },
   { name: "Custom", width: 800, height: 600, icon: Settings }
 ]
 
 export default function ScreenshotGenerator() {
-  const { currentTheme } = useTheme()
   const canvasRef = useRef<HTMLDivElement>(null)
   
   // State management
@@ -292,7 +283,7 @@ console.log(\`The 10th Fibonacci number is: \${result}\`);`)
   const [watermarkText, setWatermarkText] = useState("CodeSnippet.dev")
   const [padding, setPadding] = useState([24])
   const [fontSize, setFontSize] = useState([14])
-  const [lineHeight, setLineHeight] = useState([1.5])
+  const [lineHeight] = useState([1.5])
   const [selectedDimension, setSelectedDimension] = useState("Desktop")
   const [customWidth, setCustomWidth] = useState(800)
   const [customHeight, setCustomHeight] = useState(600)
@@ -348,7 +339,7 @@ console.log(\`The 10th Fibonacci number is: \${result}\`);`)
     try {
       await navigator.clipboard.writeText(code)
       toast.success('Code copied to clipboard!')
-    } catch (error) {
+    } catch {
       toast.error('Failed to copy code')
     }
   }
@@ -373,7 +364,7 @@ console.log(\`The 10th Fibonacci number is: \${result}\`);`)
           toast.success('Image copied to clipboard!')
         }
       })
-    } catch (error) {
+    } catch {
       toast.error('Failed to copy image')
     }
   }
@@ -388,30 +379,6 @@ console.log(\`The 10th Fibonacci number is: \${result}\`);`)
     }
   }
 
-
-  // Reset to defaults
-  const resetToDefaults = () => {
-    setCode(`function fibonacci(n) {
-  if (n <= 1) return n;
-  return fibonacci(n - 1) + fibonacci(n - 2);
-}
-
-const result = fibonacci(10);
-console.log(\`The 10th Fibonacci number is: \${result}\`);`)
-    setSelectedLanguage("javascript")
-    setSelectedTheme("github")
-    setShowLineNumbers(true)
-    setShowWatermark(true)
-    setWatermarkText("CodeSnippet.dev")
-    setPadding([24])
-    setFontSize([14])
-    setLineHeight([1.5])
-    setSelectedDimension("Desktop")
-    setCustomWidth(800)
-    setCustomHeight(600)
-    
-    toast.success("Reset to defaults")
-  }
 
   const currentDimensions = getCurrentDimensions()
   const theme = codeThemes[selectedTheme as keyof typeof codeThemes]
@@ -452,7 +419,7 @@ console.log(\`The 10th Fibonacci number is: \${result}\`);`)
                 <span className="text-sm text-white">18 Languages</span>
               </div>
               <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
-                <Image className="w-4 h-4 text-green-400" />
+                <ImageIcon className="w-4 h-4 text-green-400" />
                 <span className="text-sm text-white">HD Export</span>
               </div>
             </div>

@@ -1,13 +1,10 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useTheme } from "@/contexts/theme-context"
 import AboutSection from "@/components/sections/about-section"
 import SidebarLayout from "@/components/sidebar-layout"
 
 export default function AboutPage() {
-  const { currentTheme } = useTheme()
-
   return (
     <SidebarLayout>
       <motion.div 

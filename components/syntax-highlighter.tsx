@@ -2,10 +2,21 @@
 
 import { memo } from "react"
 
+interface HighlighterTheme {
+  string: string
+  comment: string
+  keyword: string
+  number: string
+  function: string
+  variable: string
+  type?: string
+  text: string
+}
+
 interface SyntaxHighlighterProps {
   code: string
   language: string
-  theme: any
+  theme: HighlighterTheme
   fontSize: number
   lineHeight: number
   showLineNumbers: boolean
@@ -209,8 +220,8 @@ export default memo(function SyntaxHighlighter({
     let highlighted = text
 
     // Apply patterns in order of specificity
-    patterns.forEach(({ pattern, style, type }) => {
-      highlighted = highlighted.replace(pattern, (match, ...groups) => {
+    patterns.forEach(({ pattern, style }) => {
+      highlighted = highlighted.replace(pattern, (match) => {
         const styleString = Object.entries(style)
           .map(([key, value]) => `${key}: ${value}`)
           .join('; ')

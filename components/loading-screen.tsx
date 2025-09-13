@@ -1,7 +1,8 @@
 "use client"
+/* eslint-disable react/no-unescaped-entities */
 
 import { motion } from "framer-motion"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { useTheme } from "@/contexts/theme-context"
 
 export default function LoadingScreen() {
@@ -9,14 +10,14 @@ export default function LoadingScreen() {
   const [currentStep, setCurrentStep] = useState("")
   const { currentTheme } = useTheme()
 
-  const steps = [
+  const steps = useMemo(() => [
     "Initializing portfolio...",
     "Loading components...",
     "Fetching developer data...",
     "Compiling skills...",
     "Building projects...",
     "Ready to deploy!",
-  ]
+  ], [])
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -29,7 +30,7 @@ export default function LoadingScreen() {
     }, 200)
 
     return () => clearInterval(interval)
-  }, [])
+  }, [steps])
 
   // Add safety check
   if (!currentTheme) {

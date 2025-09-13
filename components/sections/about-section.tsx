@@ -1,4 +1,5 @@
 "use client"
+/* eslint-disable react/no-unescaped-entities */
 
 import { motion } from "framer-motion"
 import { Brain, Coffee, Code, Zap } from "lucide-react"
