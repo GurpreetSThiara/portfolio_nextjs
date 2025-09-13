@@ -21,9 +21,17 @@ export default function Navigation({ activeSection, onTerminalToggle }: Navigati
     { id: "skills", label: "<Skills />", path: "/skills" },
     { id: "projects", label: "<Projects />", path: "/projects" },
     { id: "contact", label: "<Contact />", path: "/contact" },
+    { id: "generator", label: "<Screenshot />", path: "/screenshot-generator" },
   ]
 
   const scrollToSection = (sectionId: string) => {
+    // Handle special routes
+    if (sectionId === "generator") {
+      window.location.href = "/screenshot-generator"
+      setIsMenuOpen(false)
+      return
+    }
+    
     const element = document.getElementById(sectionId)
     if (element) {
       element.scrollIntoView({ behavior: "smooth" })
