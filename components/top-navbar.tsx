@@ -48,19 +48,19 @@ export default function TopNavbar({ showSidebarToggle = false, onSidebarToggle }
     {
       icon: Mail,
       label: "Email",
-      href: "mailto:gurpreet@example.com",
+      href: "mailto:gurpreetthiara221098@gmail.com",
       color: "hover:text-blue-400"
     },
     {
       icon: Phone,
       label: "Call",
-      href: "tel:+1234567890",
+      href: "tel:+918872269487",
       color: "hover:text-green-400"
     },
     {
       icon: Linkedin,
       label: "LinkedIn",
-      href: "https://linkedin.com/in/gurpreet-singh",
+      href: "https://linkedin.com/in/gurpreetsthiara",
       color: "hover:text-blue-600"
     }
   ]
