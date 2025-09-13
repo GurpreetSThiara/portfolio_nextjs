@@ -1,6 +1,4 @@
 "use client"
-
-import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { 
   Home, 
@@ -9,7 +7,6 @@ import {
   Zap, 
   Code, 
   MessageSquare, 
-  Menu, 
   X
 } from "lucide-react"
 import { useTheme } from "@/contexts/theme-context"

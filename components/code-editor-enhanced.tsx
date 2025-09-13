@@ -1,12 +1,20 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
-import { motion } from "framer-motion"
+import { useRef } from "react"
+
+interface HighlighterTheme {
+  string: string
+  comment: string
+  keyword: string
+  number: string
+  function: string
+  text: string
+}
 
 interface CodeEditorEnhancedProps {
   code: string
   language: string
-  theme: any
+  theme: HighlighterTheme
   fontSize: number
   lineHeight: number
   showLineNumbers: boolean
@@ -22,7 +30,6 @@ export default function CodeEditorEnhanced({
   showLineNumbers,
   onCodeChange
 }: CodeEditorEnhancedProps) {
-  const [cursorPosition, setCursorPosition] = useState(0)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const lineNumbersRef = useRef<HTMLDivElement>(null)
 
@@ -67,8 +74,7 @@ export default function CodeEditorEnhanced({
     if (!line.trim()) return <span>{line}</span>
 
     const langKeywords = keywords[language as keyof typeof keywords] || keywords.javascript
-    const parts = []
-    let remaining = line
+    const parts = [] as React.ReactNode[]
 
     // Handle strings (single, double, template literals)
     const stringRegex = /(["'`])((?:\\.|(?!\1)[^\\])*?)\1|(\/\/.*$)|(\/\*[\s\S]*?\*\/)/g
@@ -111,8 +117,8 @@ export default function CodeEditorEnhanced({
 
     // Add remaining text
     if (lastIndex < line.length) {
-      const remaining = line.slice(lastIndex)
-      parts.push(highlightKeywords(remaining, langKeywords))
+      const rest = line.slice(lastIndex)
+      parts.push(highlightKeywords(rest, langKeywords))
     }
 
     return parts.length > 0 ? parts : <span>{line}</span>

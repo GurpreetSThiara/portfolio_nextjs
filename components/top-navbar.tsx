@@ -9,9 +9,7 @@ import {
   Menu, 
   X, 
   Code, 
-  Image,
-  Sun,
-  Moon,
+  Image as ImageIcon,
   Palette
 } from "lucide-react"
 import { useTheme } from "@/contexts/theme-context"
@@ -182,7 +180,7 @@ export default function TopNavbar({ showSidebarToggle = false, onSidebarToggle }
               className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0"
               size="sm"
             >
-              <Image className="w-4 h-4 mr-2" />
+              <ImageIcon className="w-4 h-4 mr-2" />
               <span className="hidden sm:inline">Screenshot</span>
             </Button>
 

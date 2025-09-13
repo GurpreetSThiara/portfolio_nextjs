@@ -14,7 +14,7 @@ interface TerminalProps {
 export default function Terminal({ onClose }: TerminalProps) {
   const [input, setInput] = useState("")
   const [history, setHistory] = useState<Array<{ command: string; output: string[] }>>([])
-  const [currentPath, setCurrentPath] = useState("~/portfolio")
+  const [currentPath] = useState("~/portfolio")
   const inputRef = useRef<HTMLInputElement>(null)
   const { currentTheme } = useTheme()
 

@@ -9,11 +9,12 @@ interface CodeEditorProps {
   language?: string
 }
 
-export default function CodeEditor({ title = "code.js", code, language = "javascript" }: CodeEditorProps) {
+export default function CodeEditor({ title = "code.js", code, language: _language = "javascript" }: CodeEditorProps) {
   const [isMinimized, setIsMinimized] = useState(false)
 
   return (
     <motion.div
+      data-language={_language}
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
