@@ -156,7 +156,7 @@ export default function AboutSection() {
               </div>
             </div>
 
-            {/* Stats */}
+          
             <div className="grid grid-cols-2 gap-4">
               <div className={`${currentTheme.cardBg} ${currentTheme.border} border rounded-lg p-4 text-center`}>
                 <div className={`text-3xl font-bold ${currentTheme.accent} mb-2`}>2+</div>
