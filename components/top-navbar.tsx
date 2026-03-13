@@ -30,11 +30,7 @@ export default function TopNavbar({ showSidebarToggle = false, onSidebarToggle }
     router.push(path)
   }
 
-  const toggleTheme = () => {
-    const currentIndex = availableThemes.findIndex(theme => theme.id === currentTheme.id)
-    const nextIndex = (currentIndex + 1) % availableThemes.length
-    setTheme(availableThemes[nextIndex].id)
-  }
+
 
   if (!currentTheme) return null
 
@@ -150,16 +146,7 @@ export default function TopNavbar({ showSidebarToggle = false, onSidebarToggle }
               })}
             </div>
 
-            {/* Theme Toggle */}
-            <Button
-              onClick={toggleTheme}
-              variant="ghost"
-              size="icon"
-              className={`${currentTheme.textSecondary} hover:${currentTheme.accent} hover:${currentTheme.cardBg} w-9 h-9 md:w-10 md:h-10`}
-              title="Toggle Theme"
-            >
-              <Palette className="w-4 h-4 md:w-5 md:h-5" />
-            </Button>
+
 
             {/* Mode Toggle */}
             <Button
