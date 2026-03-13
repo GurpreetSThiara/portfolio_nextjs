@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { useTheme } from "@/contexts/theme-context"
 
 export default function ContactSection() {
-  const { currentTheme } = useTheme()
+  const { currentTheme, displayMode } = useTheme()
 
   const contactMethods = [
     {
@@ -22,7 +22,7 @@ export default function ContactSection() {
       method: "phone",
       icon: Phone,
       label: "Phone",
-      value: "+91 8872269487",
+      value: "+91 8872269487, +91 9915116865",
       href: "tel:+918872269487",
     },
     {
@@ -35,7 +35,7 @@ export default function ContactSection() {
   ]
 
   return (
-    <section id="contact" className={`py-24 px-6 ${currentTheme.background}`}>
+    <section id="contact" className={`py-20 px-6 ${currentTheme.background} min-h-full flex flex-col justify-center`}>
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -45,13 +45,19 @@ export default function ContactSection() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            <span className={currentTheme.codeKeyword}>{"<"}</span>
-            <span className={currentTheme.accent}>Contact</span>
-            <span className={currentTheme.codeKeyword}>{" />"}</span>
+            {displayMode === "developer" ? (
+              <>
+                <span className={currentTheme.codeKeyword}>{"<"}</span>
+                <span className={currentTheme.accent}>Contact</span>
+                <span className={currentTheme.codeKeyword}>{" />"}</span>
+              </>
+            ) : (
+              "Get In Touch"
+            )}
           </h2>
           <div className={`w-24 h-1 bg-gradient-to-r ${currentTheme.gradient} mx-auto rounded-full`} />
-          <p className={`${currentTheme.textSecondary} mt-6 max-w-3xl mx-auto font-mono`}>
-            <span className={currentTheme.codeComment}>{"// "}</span>
+          <p className={`${currentTheme.textSecondary} mt-6 max-w-3xl mx-auto ${displayMode === 'developer' ? 'font-mono' : ''}`}>
+            {displayMode === "developer" && <span className={currentTheme.codeComment}>{"// "}</span>}
             Ready to collaborate? Let's build something amazing together!
           </p>
         </motion.div>
@@ -65,66 +71,79 @@ export default function ContactSection() {
             viewport={{ once: true }}
             className="space-y-8"
           >
-            {/* Code Block */}
-            <div className={`${currentTheme.cardBg} ${currentTheme.border} border rounded-lg`}>
-              <div
-                className={`flex items-center justify-between px-4 py-3 ${currentTheme.cardBg} rounded-t-lg ${currentTheme.border} border-b`}
-              >
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-[#ff5f56] rounded-full"></div>
-                  <div className="w-3 h-3 bg-[#ffbd2e] rounded-full"></div>
-                  <div className="w-3 h-3 bg-[#27ca3f] rounded-full"></div>
+            {/* Code Block - only for developer mode */}
+            {displayMode === "developer" && (
+              <div className={`${currentTheme.cardBg} ${currentTheme.border} border rounded-lg`}>
+                <div
+                  className={`flex items-center justify-between px-4 py-3 ${currentTheme.cardBg} rounded-t-lg ${currentTheme.border} border-b`}
+                >
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 bg-[#ff5f56] rounded-full"></div>
+                    <div className="w-3 h-3 bg-[#ffbd2e] rounded-full"></div>
+                    <div className="w-3 h-3 bg-[#27ca3f] rounded-full"></div>
+                  </div>
+                  <div className={`${currentTheme.textSecondary} text-sm font-mono`}>contact.js</div>
+                  <div className="w-16"></div>
                 </div>
-                <div className={`${currentTheme.textSecondary} text-sm font-mono`}>contact.js</div>
-                <div className="w-16"></div>
-              </div>
 
-              <div className="p-6 font-mono text-sm">
-                <div className="space-y-2">
-                  <div className={currentTheme.textSecondary}>
-                    <span className={currentTheme.codeComment}>{"// "}</span>
-                    Get in touch with me
-                  </div>
-                  <div className="h-2"></div>
-                  <div>
-                    <span className={currentTheme.codeKeyword}>const</span>{" "}
-                    <span className={currentTheme.codeVariable}>contactInfo</span>{" "}
-                    <span className={currentTheme.codeKeyword}>=</span> <span className={currentTheme.text}>{"{"}</span>
-                  </div>
-                  <div className="pl-4 space-y-1">
+                <div className="p-6 font-mono text-sm">
+                  <div className="space-y-2">
+                    <div className={currentTheme.textSecondary}>
+                      <span className={currentTheme.codeComment}>{"// "}</span>
+                      Get in touch with me
+                    </div>
+                    <div className="h-2"></div>
                     <div>
-                      <span className={currentTheme.codeVariable}>email</span>
-                      <span className={currentTheme.text}>: </span>
-                      <span className={currentTheme.codeString}>"gurpreetthiara221098@gmail.com"</span>
-                      <span className={currentTheme.text}>,</span>
+                      <span className={currentTheme.codeKeyword}>const</span>{" "}
+                      <span className={currentTheme.codeVariable}>contactInfo</span>{" "}
+                      <span className={currentTheme.codeKeyword}>=</span> <span className={currentTheme.text}>{"{"}</span>
+                    </div>
+                    <div className="pl-4 space-y-1">
+                      <div>
+                        <span className={currentTheme.codeVariable}>email</span>
+                        <span className={currentTheme.text}>: </span>
+                        <span className={currentTheme.codeString}>"gurpreetthiara221098@gmail.com"</span>
+                        <span className={currentTheme.text}>,</span>
+                      </div>
+                      <div>
+                        <span className={currentTheme.codeVariable}>phone</span>
+                        <span className={currentTheme.text}>: </span>
+                        <span className={currentTheme.text}>[</span>
+                        <span className={currentTheme.codeString}>"+91 8872269487"</span>
+                        <span className={currentTheme.text}>, </span>
+                        <span className={currentTheme.codeString}>"+91 9915116865"</span>
+                        <span className={currentTheme.text}>],</span>
+                      </div>
+                      <div>
+                        <span className={currentTheme.codeVariable}>location</span>
+                        <span className={currentTheme.text}>: </span>
+                        <span className={currentTheme.codeString}>"Hoshiarpur, Punjab"</span>
+                        <span className={currentTheme.text}>,</span>
+                      </div>
+                      <div>
+                        <span className={currentTheme.codeVariable}>availability</span>
+                        <span className={currentTheme.text}>: </span>
+                        <span className={currentTheme.codeVariable}>true</span>
+                      </div>
                     </div>
                     <div>
-                      <span className={currentTheme.codeVariable}>phone</span>
-                      <span className={currentTheme.text}>: </span>
-                      <span className={currentTheme.codeString}>"+91 8872269487"</span>
-                      <span className={currentTheme.text}>,</span>
+                      <span className={currentTheme.text}>{"}"}</span>
                     </div>
-                    <div>
-                      <span className={currentTheme.codeVariable}>location</span>
-                      <span className={currentTheme.text}>: </span>
-                      <span className={currentTheme.codeString}>"Hoshiarpur, Punjab"</span>
-                      <span className={currentTheme.text}>,</span>
-                    </div>
-                    <div>
-                      <span className={currentTheme.codeVariable}>availability</span>
-                      <span className={currentTheme.text}>: </span>
-                      <span className={currentTheme.codeVariable}>true</span>
-                    </div>
-                  </div>
-                  <div>
-                    <span className={currentTheme.text}>{"}"}</span>
                   </div>
                 </div>
               </div>
-            </div>
+            )}
 
             {/* Contact Methods */}
             <div className="space-y-4">
+              {displayMode === "professional" && (
+                <div className="mb-6">
+                  <h3 className={`text-2xl font-bold ${currentTheme.text} mb-2`}>Contact Information</h3>
+                  <p className={`${currentTheme.textSecondary} leading-relaxed`}>
+                    Feel free to reach out through any of these channels. I'm always open to discussing new projects, creative ideas, or opportunities.
+                  </p>
+                </div>
+              )}
               {contactMethods.map((contact, index) => (
                 <motion.a
                   key={index}
@@ -143,11 +162,11 @@ export default function ContactSection() {
                   </div>
                   <div>
                     <h4
-                      className={`font-bold ${currentTheme.text} group-hover:${currentTheme.accent} transition-colors font-mono`}
+                      className={`font-bold ${currentTheme.text} group-hover:${currentTheme.accent} transition-colors ${displayMode === 'developer' ? 'font-mono' : ''}`}
                     >
                       {contact.label}
                     </h4>
-                    <p className={`${currentTheme.textSecondary} font-mono text-sm`}>{contact.value}</p>
+                    <p className={`${currentTheme.textSecondary} ${displayMode === 'developer' ? 'font-mono' : ''} text-sm`}>{contact.value}</p>
                   </div>
                 </motion.a>
               ))}
@@ -161,91 +180,126 @@ export default function ContactSection() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <div className={`${currentTheme.cardBg} ${currentTheme.border} border rounded-lg`}>
-              <div
-                className={`flex items-center justify-between px-4 py-3 ${currentTheme.cardBg} rounded-t-lg ${currentTheme.border} border-b`}
-              >
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-[#ff5f56] rounded-full"></div>
-                  <div className="w-3 h-3 bg-[#ffbd2e] rounded-full"></div>
-                  <div className="w-3 h-3 bg-[#27ca3f] rounded-full"></div>
+            <div className={`${currentTheme.cardBg} ${currentTheme.border} border rounded-lg overflow-hidden shadow-xl`}>
+              {displayMode === "developer" ? (
+                <div
+                  className={`flex items-center justify-between px-4 py-3 ${currentTheme.cardBg} rounded-t-lg ${currentTheme.border} border-b`}
+                >
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 bg-[#ff5f56] rounded-full"></div>
+                    <div className="w-3 h-3 bg-[#ffbd2e] rounded-full"></div>
+                    <div className="w-3 h-3 bg-[#27ca3f] rounded-full"></div>
+                  </div>
+                  <div className={`${currentTheme.textSecondary} text-sm font-mono`}>message.jsx</div>
+                  <div className="w-16"></div>
                 </div>
-                <div className={`${currentTheme.textSecondary} text-sm font-mono`}>message.jsx</div>
-                <div className="w-16"></div>
-              </div>
+              ) : (
+                <div className={`px-8 py-6 ${currentTheme.cardBg} border-b`}>
+                  <h3 className={`text-2xl font-bold ${currentTheme.text}`}>Send a Message</h3>
+                  <p className={`${currentTheme.textSecondary} text-sm mt-1`}>I'll get back to you as soon as possible.</p>
+                </div>
+              )}
 
-              <div className="p-6">
-                <div className="mb-6">
-                  <h3 className={`text-xl font-bold ${currentTheme.text} mb-2 font-mono`}>
-                    <span className={currentTheme.codeKeyword}>{"function "}</span>
-                    <span className={currentTheme.codeFunction}>sendMessage</span>
-                    <span className={currentTheme.text}>() {"{"}</span>
-                  </h3>
-                  <p className={`${currentTheme.textSecondary} font-mono text-sm`}>
-                    <span className={currentTheme.codeComment}>{"// "}</span>
-                    Fill out the form below to get in touch
-                  </p>
-                </div>
+              <div className="p-8">
+                {displayMode === "developer" && (
+                  <div className="mb-6">
+                    <h3 className={`text-xl font-bold ${currentTheme.text} mb-2 font-mono`}>
+                      <span className={currentTheme.codeKeyword}>{"function "}</span>
+                      <span className={currentTheme.codeFunction}>sendMessage</span>
+                      <span className={currentTheme.text}>() {"{"}</span>
+                    </h3>
+                    <p className={`${currentTheme.textSecondary} font-mono text-sm`}>
+                      <span className={currentTheme.codeComment}>{"// "}</span>
+                      Fill out the form below to get in touch
+                    </p>
+                  </div>
+                )}
 
                 <form className="space-y-6">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className={`block text-sm font-medium ${currentTheme.text} mb-2 font-mono`}>
-                        <span className={currentTheme.codeVariable}>name</span>
-                        <span className={currentTheme.text}>:</span>
+                      <label className={`block text-sm font-medium ${currentTheme.text} mb-2 ${displayMode === 'developer' ? 'font-mono' : ''}`}>
+                        {displayMode === "developer" ? (
+                          <>
+                            <span className={currentTheme.codeVariable}>name</span>
+                            <span className={currentTheme.text}>:</span>
+                          </>
+                        ) : (
+                          "Name"
+                        )}
                       </label>
                       <Input
-                        placeholder="Your name"
-                        className={`${currentTheme.background} ${currentTheme.border} border ${currentTheme.text} placeholder:${currentTheme.textSecondary} focus:${currentTheme.accent.replace("text-", "border-")} font-mono`}
+                        placeholder={displayMode === "developer" ? "Your name" : "Enter your name"}
+                        className={`${currentTheme.background} ${currentTheme.border} border ${currentTheme.text} placeholder:${currentTheme.textSecondary} focus:${currentTheme.accent.replace("text-", "border-")} ${displayMode === 'developer' ? 'font-mono' : ''}`}
                       />
                     </div>
                     <div>
-                      <label className={`block text-sm font-medium ${currentTheme.text} mb-2 font-mono`}>
-                        <span className={currentTheme.codeVariable}>email</span>
-                        <span className={currentTheme.text}>:</span>
+                      <label className={`block text-sm font-medium ${currentTheme.text} mb-2 ${displayMode === 'developer' ? 'font-mono' : ''}`}>
+                        {displayMode === "developer" ? (
+                          <>
+                            <span className={currentTheme.codeVariable}>email</span>
+                            <span className={currentTheme.text}>:</span>
+                          </>
+                        ) : (
+                          "Email"
+                        )}
                       </label>
                       <Input
                         type="email"
-                        placeholder="your@email.com"
-                        className={`${currentTheme.background} ${currentTheme.border} border ${currentTheme.text} placeholder:${currentTheme.textSecondary} focus:${currentTheme.accent.replace("text-", "border-")} font-mono`}
+                        placeholder={displayMode === "developer" ? "your@email.com" : "Enter your email"}
+                        className={`${currentTheme.background} ${currentTheme.border} border ${currentTheme.text} placeholder:${currentTheme.textSecondary} focus:${currentTheme.accent.replace("text-", "border-")} ${displayMode === 'developer' ? 'font-mono' : ''}`}
                       />
                     </div>
                   </div>
                   <div>
-                    <label className={`block text-sm font-medium ${currentTheme.text} mb-2 font-mono`}>
-                      <span className={currentTheme.codeVariable}>subject</span>
-                      <span className={currentTheme.text}>:</span>
+                    <label className={`block text-sm font-medium ${currentTheme.text} mb-2 ${displayMode === 'developer' ? 'font-mono' : ''}`}>
+                      {displayMode === "developer" ? (
+                        <>
+                          <span className={currentTheme.codeVariable}>subject</span>
+                          <span className={currentTheme.text}>:</span>
+                        </>
+                      ) : (
+                        "Subject"
+                      )}
                     </label>
                     <Input
-                      placeholder="What's this about?"
-                      className={`${currentTheme.background} ${currentTheme.border} border ${currentTheme.text} placeholder:${currentTheme.textSecondary} focus:${currentTheme.accent.replace("text-", "border-")} font-mono`}
+                      placeholder={displayMode === "developer" ? "What's this about?" : "Project Inquiry"}
+                      className={`${currentTheme.background} ${currentTheme.border} border ${currentTheme.text} placeholder:${currentTheme.textSecondary} focus:${currentTheme.accent.replace("text-", "border-")} ${displayMode === 'developer' ? 'font-mono' : ''}`}
                     />
                   </div>
                   <div>
-                    <label className={`block text-sm font-medium ${currentTheme.text} mb-2 font-mono`}>
-                      <span className={currentTheme.codeVariable}>message</span>
-                      <span className={currentTheme.text}>:</span>
+                    <label className={`block text-sm font-medium ${currentTheme.text} mb-2 ${displayMode === 'developer' ? 'font-mono' : ''}`}>
+                      {displayMode === "developer" ? (
+                        <>
+                          <span className={currentTheme.codeVariable}>message</span>
+                          <span className={currentTheme.text}>:</span>
+                        </>
+                      ) : (
+                        "Message"
+                      )}
                     </label>
                     <Textarea
-                      placeholder="Tell me about your project..."
+                      placeholder={displayMode === "developer" ? "Tell me about your project..." : "Write your message here..."}
                       rows={5}
-                      className={`${currentTheme.background} ${currentTheme.border} border ${currentTheme.text} placeholder:${currentTheme.textSecondary} focus:${currentTheme.accent.replace("text-", "border-")} font-mono resize-none`}
+                      className={`${currentTheme.background} ${currentTheme.border} border ${currentTheme.text} placeholder:${currentTheme.textSecondary} focus:${currentTheme.accent.replace("text-", "border-")} ${displayMode === 'developer' ? 'font-mono' : ''} resize-none`}
                     />
                   </div>
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     type="submit"
-                    className={`w-full flex items-center justify-center gap-3 px-6 py-3 ${currentTheme.success.replace("text-", "bg-")} hover:opacity-80 text-white rounded-lg font-medium transition-colors font-mono`}
+                    className={`w-full flex items-center justify-center gap-3 px-6 py-4 ${currentTheme.success.replace("text-", "bg-")} hover:opacity-90 text-white rounded-lg font-bold transition-all ${displayMode === 'developer' ? 'font-mono' : ''} shadow-lg`}
                   >
                     <Send className="w-4 h-4" />
-                    <span>{"sendMessage()"}</span>
+                    <span>{displayMode === "developer" ? "sendMessage()" : "Send Message"}</span>
                   </motion.button>
                 </form>
 
-                <div className={`mt-6 ${currentTheme.textSecondary} font-mono text-sm`}>
-                  <span className={currentTheme.text}>{"}"}</span>
-                </div>
+                {displayMode === "developer" && (
+                  <div className={`mt-6 ${currentTheme.textSecondary} font-mono text-sm`}>
+                    <span className={currentTheme.text}>{"}"}</span>
+                  </div>
+                )}
               </div>
             </div>
           </motion.div>

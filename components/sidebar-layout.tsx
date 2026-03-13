@@ -4,6 +4,7 @@ import { useState } from "react"
 import { useTheme } from "@/contexts/theme-context"
 import TopNavbar from "./top-navbar"
 import MobileSidebar from "./mobile-sidebar"
+import ModeSelectionModal from "./mode-selection-modal"
 
 interface SidebarLayoutProps {
   children: React.ReactNode
@@ -11,7 +12,7 @@ interface SidebarLayoutProps {
 
 export default function SidebarLayout({ children }: SidebarLayoutProps) {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false)
-  const { currentTheme } = useTheme()
+  const { currentTheme, displayMode } = useTheme()
 
   if (!currentTheme) {
     return (
@@ -22,7 +23,8 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
   }
 
   return (
-    <div className={`min-h-screen ${currentTheme.background} ${currentTheme.text} font-mono transition-all duration-500`}>
+    <div className={`min-h-screen ${currentTheme.background} ${currentTheme.text} ${displayMode === 'developer' ? 'font-mono' : 'font-sans'} transition-all duration-500`}>
+      <ModeSelectionModal />
       {/* Top Navbar */}
       <TopNavbar 
         showSidebarToggle={true} 
@@ -36,10 +38,8 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
       />
 
       {/* Main Content */}
-      <div className="pt-16">
-        <div className="min-h-screen">
-          {children}
-        </div>
+      <div className="pt-16 h-screen overflow-hidden">
+        {children}
       </div>
     </div>
   )

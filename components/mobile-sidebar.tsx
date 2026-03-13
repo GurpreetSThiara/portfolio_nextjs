@@ -11,7 +11,6 @@ import {
 } from "lucide-react"
 import { useTheme } from "@/contexts/theme-context"
 import { Button } from "@/components/ui/button"
-import { useRouter, usePathname } from "next/navigation"
 
 interface MobileSidebarProps {
   isOpen: boolean
@@ -20,50 +19,45 @@ interface MobileSidebarProps {
 
 const sidebarItems = [
   { 
-    id: "home", 
+    id: "hero", 
     label: "Home", 
     icon: Home, 
-    path: "/"
   },
   { 
     id: "about", 
     label: "About", 
     icon: User, 
-    path: "/about"
   },
   { 
     id: "experience", 
     label: "Experience", 
     icon: Briefcase, 
-    path: "/experience"
   },
   { 
     id: "skills", 
     label: "Skills", 
     icon: Zap, 
-    path: "/skills"
   },
   { 
     id: "projects", 
     label: "Projects", 
     icon: Code, 
-    path: "/projects"
   },
   { 
     id: "contact", 
     label: "Contact", 
     icon: MessageSquare, 
-    path: "/contact"
   }
 ]
 
 export default function MobileSidebar({ isOpen, onClose }: MobileSidebarProps) {
-  const { currentTheme } = useTheme()
-  const router = useRouter()
-  const pathname = usePathname()
+  const { currentTheme, displayMode, setDisplayMode } = useTheme()
 
-  const navigateToRoute = (path: string) => {
-    router.push(path)
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id)
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" })
+    }
     onClose()
   }
 
@@ -95,11 +89,13 @@ export default function MobileSidebar({ isOpen, onClose }: MobileSidebarProps) {
               <div className={`flex items-center justify-between p-6 ${currentTheme.border} border-b`}>
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg">
-                    <Code className="w-6 h-6 text-white" />
+                    {displayMode === "developer" ? <Code className="w-6 h-6 text-white" /> : <User className="w-6 h-6 text-white" />}
                   </div>
                   <div>
                     <h1 className="text-xl font-bold text-white">Gurpreet Singh</h1>
-                    <p className="text-sm text-gray-400">Software Engineer</p>
+                    <p className="text-sm text-gray-400">
+                      {displayMode === "developer" ? "Software Engineer" : "Professional Portfolio"}
+                    </p>
                   </div>
                 </div>
                 <Button
@@ -116,32 +112,37 @@ export default function MobileSidebar({ isOpen, onClose }: MobileSidebarProps) {
               <nav className="flex-1 p-6">
                 <div className="space-y-2">
                   {sidebarItems.map((item) => {
-                    const isActive = pathname === item.path
                     const Icon = item.icon
                     
                     return (
                       <motion.button
                         key={item.id}
-                        onClick={() => navigateToRoute(item.path)}
+                        onClick={() => scrollToSection(item.id)}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
-                        className={`w-full flex items-center gap-4 p-4 rounded-lg transition-all duration-300 ${
-                          isActive
-                            ? `${currentTheme.cardBg} ${currentTheme.accent} ${currentTheme.border} border shadow-lg`
-                            : `${currentTheme.textSecondary} hover:${currentTheme.accent} hover:${currentTheme.cardBg}`
-                        }`}
+                        className={`w-full flex items-center gap-4 p-4 rounded-lg transition-all duration-300 ${currentTheme.textSecondary} hover:${currentTheme.accent} hover:${currentTheme.cardBg}`}
                       >
                         <Icon className="w-6 h-6" />
                         <span className="font-medium">{item.label}</span>
-                        {isActive && (
-                          <motion.div
-                            layoutId="mobileActiveIndicator"
-                            className="w-2 h-2 bg-blue-500 rounded-full ml-auto"
-                          />
-                        )}
                       </motion.button>
                     )
                   })}
+                </div>
+
+                {/* Mode Switcher */}
+                <div className="mt-8 pt-6 border-t border-white/10">
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => setDisplayMode(displayMode === 'developer' ? 'professional' : 'developer')}
+                    className={`w-full flex items-center gap-4 p-4 rounded-lg transition-all duration-300 ${currentTheme.cardBg} ${currentTheme.accent} ${currentTheme.border} border`}
+                  >
+                    {displayMode === "developer" ? <User className="w-6 h-6" /> : <Code className="w-6 h-6" />}
+                    <div className="text-left">
+                      <p className="font-bold">Switch to {displayMode === 'developer' ? 'Professional' : 'Developer'}</p>
+                      <p className="text-xs text-gray-400">Current: {displayMode === 'developer' ? 'Dev Mode' : 'Pro Mode'}</p>
+                    </div>
+                  </motion.button>
                 </div>
               </nav>
             </div>

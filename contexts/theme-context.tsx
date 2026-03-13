@@ -1,6 +1,8 @@
 "use client"
 
-import { createContext, useContext, useState, type ReactNode } from "react"
+import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
+
+export type DisplayMode = "developer" | "professional"
 
 export interface Theme {
   id: string
@@ -70,29 +72,101 @@ export const themes: Record<string, Theme> = {
     gradient: "from-[#007acc] to-[#4fc1ff]",
     shadow: "shadow-xl",
   },
+  premium: {
+    id: "premium",
+    name: "Premium Light",
+    description: "Clean, professional light theme for a modern look",
+    background: "bg-[#f8f9fa]",
+    cardBg: "bg-white",
+    border: "border-[#e9ecef]",
+    text: "text-[#212529]",
+    textSecondary: "text-[#6c757d]",
+    accent: "text-[#0d6efd]",
+    accentSecondary: "text-[#6610f2]",
+    success: "text-[#198754]",
+    warning: "text-[#ffc107]",
+    error: "text-[#dc3545]",
+    codeKeyword: "text-[#d63384]",
+    codeString: "text-[#fd7e14]",
+    codeComment: "text-[#adb5bd]",
+    codeFunction: "text-[#0dcaf0]",
+    codeVariable: "text-[#20c997]",
+    gradient: "from-[#0d6efd] to-[#6610f2]",
+    shadow: "shadow-lg",
+  },
+  midnight: {
+    id: "midnight",
+    name: "Midnight Elite",
+    description: "Deep, elegant dark theme for a sophisticated display",
+    background: "bg-[#050505]",
+    cardBg: "bg-[#0f0f0f]",
+    border: "border-[#1f1f1f]",
+    text: "text-[#f1f1f1]",
+    textSecondary: "text-[#9a9a9a]",
+    accent: "text-[#3b82f6]",
+    accentSecondary: "text-[#8b5cf6]",
+    success: "text-[#10b981]",
+    warning: "text-[#f59e0b]",
+    error: "text-[#ef4444]",
+    codeKeyword: "text-[#ec4899]",
+    codeString: "text-[#f43f5e]",
+    codeComment: "text-[#4b5563]",
+    codeFunction: "text-[#8b5cf6]",
+    codeVariable: "text-[#06b6d4]",
+    gradient: "from-[#3b82f6] to-[#8b5cf6]",
+    shadow: "shadow-2xl shadow-blue-500/10",
+  },
 }
 
 interface ThemeContextType {
   currentTheme: Theme
   setTheme: (themeId: string) => void
   availableThemes: Theme[]
+  displayMode: DisplayMode
+  setDisplayMode: (mode: DisplayMode) => void
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [currentThemeId, setCurrentThemeId] = useState("github")
+  const [displayMode, setDisplayMode] = useState<DisplayMode>("developer")
+
+  // Sync with localStorage on mount
+  useEffect(() => {
+    const savedMode = localStorage.getItem("portfolio-display-mode") as DisplayMode
+    const savedTheme = localStorage.getItem("portfolio-theme-id")
+    if (savedMode) setDisplayMode(savedMode)
+    if (savedTheme && themes[savedTheme]) setCurrentThemeId(savedTheme)
+  }, [])
 
   const setTheme = (themeId: string) => {
     if (themes[themeId]) {
       setCurrentThemeId(themeId)
+      localStorage.setItem("portfolio-theme-id", themeId)
     }
   }
 
-  const currentTheme = themes[currentThemeId] || themes.github // Fallback to github theme
+  const handleSetDisplayMode = (mode: DisplayMode) => {
+    setDisplayMode(mode)
+    localStorage.setItem("portfolio-display-mode", mode)
+    
+    // Auto-switch theme based on mode
+    if (mode === "professional") {
+      setTheme("midnight")
+    } else {
+      setTheme("github")
+    }
+  }
+
+  const currentTheme = themes[currentThemeId] || themes.github
   const availableThemes = Object.values(themes)
 
-  return <ThemeContext.Provider value={{ currentTheme, setTheme, availableThemes }}>{children}</ThemeContext.Provider>
+  return (
+    <ThemeContext.Provider value={{ currentTheme, setTheme, availableThemes, displayMode, setDisplayMode: handleSetDisplayMode }}>
+      {children}
+    </ThemeContext.Provider>
+  )
 }
 
 export function useTheme() {

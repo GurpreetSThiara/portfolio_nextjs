@@ -9,8 +9,8 @@ import {
   Menu, 
   X, 
   Code, 
-  Image as ImageIcon,
-  Palette
+  Palette,
+  User
 } from "lucide-react"
 import { useTheme } from "@/contexts/theme-context"
 import { Button } from "@/components/ui/button"
@@ -22,16 +22,12 @@ interface TopNavbarProps {
 }
 
 export default function TopNavbar({ showSidebarToggle = false, onSidebarToggle }: TopNavbarProps) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const { currentTheme, setTheme, availableThemes } = useTheme()
+  const { currentTheme, setTheme, availableThemes, displayMode, setDisplayMode } = useTheme()
   const router = useRouter()
   const pathname = usePathname()
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
-
   const navigateToRoute = (path: string) => {
     router.push(path)
-    setIsMenuOpen(false)
   }
 
   const toggleTheme = () => {
@@ -51,9 +47,15 @@ export default function TopNavbar({ showSidebarToggle = false, onSidebarToggle }
     },
     {
       icon: Phone,
-      label: "Call",
+      label: "Call +91 8872269487",
       href: "tel:+918872269487",
       color: "hover:text-green-400"
+    },
+    {
+      icon: Phone,
+      label: "Call +91 9915116865",
+      href: "tel:+919915116865",
+      color: "hover:text-green-500"
     },
     {
       icon: Linkedin,
@@ -91,10 +93,10 @@ export default function TopNavbar({ showSidebarToggle = false, onSidebarToggle }
               className="flex items-center gap-2 cursor-pointer"
             >
               <div className="p-1.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg">
-                <Code className="w-5 h-5 text-white" />
+                {displayMode === "developer" ? <Code className="w-5 h-5 text-white" /> : <User className="w-5 h-5 text-white" />}
               </div>
               <div className="hidden sm:block">
-                <span className={`font-bold text-lg ${currentTheme.accent}`}>
+                <span className={`font-bold text-lg ${currentTheme.accent} ${displayMode === 'developer' ? 'font-mono' : 'font-sans'}`}>
                   Gurpreet Singh
                 </span>
               </div>
@@ -103,45 +105,30 @@ export default function TopNavbar({ showSidebarToggle = false, onSidebarToggle }
 
           {/* Center Section - Navigation (Desktop) */}
           <div className="hidden md:flex items-center space-x-1">
-            <Button
-              onClick={() => navigateToRoute('/')}
-              variant="ghost"
-              className={`${pathname === '/' ? `${currentTheme.cardBg} ${currentTheme.accent} ${currentTheme.border} border` : `${currentTheme.textSecondary} hover:${currentTheme.accent} hover:${currentTheme.cardBg}`}`}
-            >
-              Home
-            </Button>
-            <Button
-              onClick={() => navigateToRoute('/about')}
-              variant="ghost"
-              className={`${pathname === '/about' ? `${currentTheme.cardBg} ${currentTheme.accent} ${currentTheme.border} border` : `${currentTheme.textSecondary} hover:${currentTheme.accent} hover:${currentTheme.cardBg}`}`}
-            >
-              About
-            </Button>
-            <Button
-              onClick={() => navigateToRoute('/experience')}
-              variant="ghost"
-              className={`${pathname === '/experience' ? `${currentTheme.cardBg} ${currentTheme.accent} ${currentTheme.border} border` : `${currentTheme.textSecondary} hover:${currentTheme.accent} hover:${currentTheme.cardBg}`}`}
-            >
-              Experience
-            </Button>
-            <Button
-              onClick={() => navigateToRoute('/projects')}
-              variant="ghost"
-              className={`${pathname === '/projects' ? `${currentTheme.cardBg} ${currentTheme.accent} ${currentTheme.border} border` : `${currentTheme.textSecondary} hover:${currentTheme.accent} hover:${currentTheme.cardBg}`}`}
-            >
-              Projects
-            </Button>
-            <Button
-              onClick={() => navigateToRoute('/contact')}
-              variant="ghost"
-              className={`${pathname === '/contact' ? `${currentTheme.cardBg} ${currentTheme.accent} ${currentTheme.border} border` : `${currentTheme.textSecondary} hover:${currentTheme.accent} hover:${currentTheme.cardBg}`}`}
-            >
-              Contact
-            </Button>
+            {[
+              { label: "Home", id: "hero" },
+              { label: "About", id: "about" },
+              { label: "Experience", id: "experience" },
+              { label: "Skills", id: "skills" },
+              { label: "Projects", id: "projects" },
+              { label: "Contact", id: "contact" },
+            ].map((item) => (
+              <Button
+                key={item.id}
+                onClick={() => {
+                  const element = document.getElementById(item.id)
+                  if (element) element.scrollIntoView({ behavior: "smooth" })
+                }}
+                variant="ghost"
+                className={`${currentTheme.textSecondary} hover:${currentTheme.accent} hover:${currentTheme.cardBg}`}
+              >
+                {item.label}
+              </Button>
+            ))}
           </div>
 
           {/* Right Section - Social Links, Theme Toggle, Screenshot Generator */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 sm:gap-2 md:gap-3">
             {/* Social Links */}
             <div className="hidden sm:flex items-center gap-1">
               {socialLinks.map((social, index) => {
@@ -167,103 +154,30 @@ export default function TopNavbar({ showSidebarToggle = false, onSidebarToggle }
             <Button
               onClick={toggleTheme}
               variant="ghost"
-              size="sm"
-              className={`${currentTheme.textSecondary} hover:${currentTheme.accent} hover:${currentTheme.cardBg}`}
+              size="icon"
+              className={`${currentTheme.textSecondary} hover:${currentTheme.accent} hover:${currentTheme.cardBg} w-9 h-9 md:w-10 md:h-10`}
               title="Toggle Theme"
             >
-              <Palette className="w-4 h-4" />
+              <Palette className="w-4 h-4 md:w-5 md:h-5" />
             </Button>
 
-            {/* Screenshot Generator Button */}
+            {/* Mode Toggle */}
             <Button
-              onClick={() => navigateToRoute('/screenshot-generator')}
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0"
-              size="sm"
-            >
-              <ImageIcon className="w-4 h-4 mr-2" />
-              <span className="hidden sm:inline">Screenshot</span>
-            </Button>
-
-            {/* Mobile Menu Button */}
-            <Button
-              onClick={toggleMenu}
+              onClick={() => setDisplayMode(displayMode === 'developer' ? 'professional' : 'developer')}
               variant="ghost"
-              size="sm"
-              className="md:hidden text-white hover:bg-white/10"
+              size="icon"
+              className={`${currentTheme.textSecondary} hover:${currentTheme.accent} hover:${currentTheme.cardBg} w-9 h-9 md:w-10 md:h-10`}
+              title={`Switch to ${displayMode === 'developer' ? 'Professional' : 'Developer'} Mode`}
             >
-              {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {displayMode === 'developer' ? (
+                <User className="w-4 h-4 md:w-5 md:h-5" />
+              ) : (
+                <Code className="w-4 h-4 md:w-5 md:h-5" />
+              )}
             </Button>
           </div>
         </div>
 
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className={`md:hidden ${currentTheme.cardBg} ${currentTheme.border} border-t overflow-hidden`}
-            >
-              <div className="px-4 py-4 space-y-2">
-                <Button
-                  onClick={() => navigateToRoute('/')}
-                  variant="ghost"
-                  className={`w-full justify-start ${pathname === '/' ? `${currentTheme.accent} ${currentTheme.cardBg}` : `${currentTheme.textSecondary} hover:${currentTheme.accent} hover:${currentTheme.cardBg}`}`}
-                >
-                  Home
-                </Button>
-                <Button
-                  onClick={() => navigateToRoute('/about')}
-                  variant="ghost"
-                  className={`w-full justify-start ${pathname === '/about' ? `${currentTheme.accent} ${currentTheme.cardBg}` : `${currentTheme.textSecondary} hover:${currentTheme.accent} hover:${currentTheme.cardBg}`}`}
-                >
-                  About
-                </Button>
-                <Button
-                  onClick={() => navigateToRoute('/experience')}
-                  variant="ghost"
-                  className={`w-full justify-start ${pathname === '/experience' ? `${currentTheme.accent} ${currentTheme.cardBg}` : `${currentTheme.textSecondary} hover:${currentTheme.accent} hover:${currentTheme.cardBg}`}`}
-                >
-                  Experience
-                </Button>
-                <Button
-                  onClick={() => navigateToRoute('/projects')}
-                  variant="ghost"
-                  className={`w-full justify-start ${pathname === '/projects' ? `${currentTheme.accent} ${currentTheme.cardBg}` : `${currentTheme.textSecondary} hover:${currentTheme.accent} hover:${currentTheme.cardBg}`}`}
-                >
-                  Projects
-                </Button>
-                <Button
-                  onClick={() => navigateToRoute('/contact')}
-                  variant="ghost"
-                  className={`w-full justify-start ${pathname === '/contact' ? `${currentTheme.accent} ${currentTheme.cardBg}` : `${currentTheme.textSecondary} hover:${currentTheme.accent} hover:${currentTheme.cardBg}`}`}
-                >
-                  Contact
-                </Button>
-                
-                {/* Mobile Social Links */}
-                <div className="flex items-center justify-center gap-4 pt-4 border-t border-gray-600">
-                  {socialLinks.map((social, index) => {
-                    const Icon = social.icon
-                    return (
-                      <a
-                        key={index}
-                        href={social.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`p-2 ${currentTheme.textSecondary} ${social.color} transition-colors`}
-                        title={social.label}
-                      >
-                        <Icon className="w-5 h-5" />
-                      </a>
-                    )
-                  })}
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
     </motion.nav>
   )
